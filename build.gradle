@@ -1,0 +1,48 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'demo'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.5')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-actuator-docs')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-devtools')
+	compile('org.springframework.boot:spring-boot-starter-mail')
+	compile('org.springframework.boot:spring-boot-starter-remote-shell')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.7.5')
+	compile ('org.springframework.boot:spring-boot-configuration-processor')
+	compile "com.h2database:h2"
+	runtime('mysql:mysql-connector-java')
+	runtime('com.h2database:h2')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('com.jayway.jsonpath:json-path:0.8.1')
+	testCompile('com.jayway.jsonpath:json-path-assert:0.8.1')
+	testCompile('org.subethamail:subethasmtp:3.1.7')
+
+}

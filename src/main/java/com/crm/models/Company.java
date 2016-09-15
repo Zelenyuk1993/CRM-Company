@@ -29,19 +29,11 @@ public class Company {
 
     private Integer profit;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "company_childrenCompany",
-            joinColumns = @JoinColumn(name = "company"),
-            inverseJoinColumns = @JoinColumn(name = "childrenCompany"))
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentCompanies")
     private Set<Company> childrenCompanies = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "company_parentCompany",
-            joinColumns = @JoinColumn(name = "company"),
-            inverseJoinColumns = @JoinColumn(name = "parentCompany"))
-    private Set<Company> parentCompanies = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    private Company parentCompanies;
 
     public Company(){
     }
@@ -82,19 +74,15 @@ public class Company {
         this.childrenCompanies = childrenCompanies;
     }
 
-    public Set<Company> getParentCompanies() {
-        return parentCompanies;
-    }
-
-    public void setParentCompanies(Set<Company> parentCompanies) {
-        this.parentCompanies = parentCompanies;
-    }
-
     public void addChildren(Company children){
         this.childrenCompanies.add(children);
     }
 
-    public void addParent(Company parent){
-        this.parentCompanies.add(parent);
+    public Company getParentCompanies() {
+        return parentCompanies;
+    }
+
+    public void setParentCompanies(Company parentCompanies) {
+        this.parentCompanies = parentCompanies;
     }
 }

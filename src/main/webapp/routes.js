@@ -12,8 +12,8 @@ app
             //State for root URL
             .state('app.main', {
                 url: "/",
-                controller: 'MainController',
-                templateUrl: 'template/main.html'
+                controller: 'CompanyController',
+                templateUrl: 'template/company.html'
             });
         
         $stateProvider

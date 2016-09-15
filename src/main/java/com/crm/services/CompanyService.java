@@ -31,4 +31,14 @@ public class CompanyService {
         return companyRepository.findOne(id);
     }
 
+    public List<Company> addChildren (Company company){
+        Company childrenCompany = companyRepository.save(company);
+        if(company.getParentCompanies() != null) {
+            Company parentCompany = companyRepository.findOne(company.getParentCompanies().getId());
+            parentCompany.addChildren(childrenCompany);
+            companyRepository.save(parentCompany);
+        }
+        return companyRepository.findAll();
+    }
+
 }

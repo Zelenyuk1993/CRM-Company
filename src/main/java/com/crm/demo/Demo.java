@@ -21,16 +21,20 @@ public class Demo {
     public String demo(){
 
         Company company0 = new Company("Parent1");
-        Company company1 = new Company("Children1");
-        Company company2 = new Company("Children2");
-        Company company3 = new Company("Children3");
-        company1.addParent(company0);
-        company1.addChildren(company2);
-        company1.addChildren(company3);
-        company3.addParent(company1);
-        company2.addParent(company1);
-        company0.addChildren(company1);
+        company0.setProfit(1000);
         companyService.save(company0);
+        Company company1 = new Company("Children1");
+        company1.setProfit(1500);
+        company1.setParentCompanies(companyService.findOne(1L));
+        companyService.save(company1);
+        Company company2 = new Company("Children2");
+        company2.setProfit(1250);
+        company2.setParentCompanies(companyService.findOne(2L));
+        companyService.save(company2);
+        Company company3 = new Company("Children3");
+        company3.setProfit(1750);
+        company3.setParentCompanies(companyService.findOne(2L));
+        companyService.save(company3);
 
         return "OKI";
     }

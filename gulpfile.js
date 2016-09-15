@@ -7,6 +7,7 @@ const htmlmin = require('gulp-htmlmin');
 const sass = require('gulp-sass');
 const newer = require('gulp-newer');
 const autoprefixer = require('gulp-autoprefixer');
+const ngTemplate = require('gulp-angular-templatecache');
 const cssmin = require('gulp-cssmin');
 const promise = require('es6-promise').Promise;
 
@@ -91,11 +92,20 @@ gulp.task('default', [
     'app-concat',
     'html-replace-index',
     'html-replace',
-    'css-transpile'
+    'css-transpile',
+    'template'
 ]);
 
-gulp.task('clean', function () {
-    return del(staticDir);
+
+gulp.task('template', function(){
+    gulp.src([
+                webAppDir + "**/*.html"
+        ])
+        .pipe(newer(staticDir + 'templates.min.js'))
+        .pipe(ngTemplate({module: 'ERP', standalone: false}))
+        .pipe(concat('templates.min.js'))
+        .pipe(ngAnnotate())
+        .pipe(gulp.dest(staticDir));
 });
 
 gulp.task('watch', function () {

@@ -30,9 +30,8 @@ public class JacksonCompanySerializer extends JsonSerializer<Company> {
                 gen.writeNumberField("id", children.getId());
                 gen.writeStringField("name", children.getName());
                 if(value.getProfit() != null){
-                    gen.writeNumberField("profit", value.getProfit());
+                    gen.writeNumberField("profit", children.getProfit());
                 }
-
                 gen.writeEndObject();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -40,19 +39,20 @@ public class JacksonCompanySerializer extends JsonSerializer<Company> {
         }));
         gen.writeEndArray();
 
-        gen.writeFieldName("parentCompanies");
-        gen.writeStartArray();
-        Optional.ofNullable(value.getParentCompanies()).ifPresent(parents -> parents.forEach(parent -> {
+        Optional.ofNullable(value.getParentCompanies()).ifPresent(parent -> {
             try {
+                gen.writeFieldName("parentCompanies");
                 gen.writeStartObject();
                 gen.writeNumberField("id", parent.getId());
                 gen.writeStringField("name", parent.getName());
+                if(value.getProfit() != null){
+                    gen.writeNumberField("profit", parent.getProfit());
+                }
                 gen.writeEndObject();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }));
-        gen.writeEndArray();
+        });
 
         gen.writeEndObject();
     }

@@ -3,10 +3,7 @@ package com.crm.controllers;
 import com.crm.models.Company;
 import com.crm.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,10 +23,16 @@ public class CompanyController {
         return companyService.getAll();
     }
 
-    @RequestMapping(value = "/api/company", method = RequestMethod.POST)
-    public Company save(@RequestBody Company company){
-        return companyService.save(company);
+    @RequestMapping(value = "/api/company/{id}", method = RequestMethod.GET)
+    public Company getCompany(@PathVariable("id") Long id){
+        return companyService.findOne(id);
     }
+
+    @RequestMapping(value = "/api/company", method = RequestMethod.POST)
+    public List<Company> save(@RequestBody Company company){
+      return companyService.addChildren(company);
+    }
+
 
 
 

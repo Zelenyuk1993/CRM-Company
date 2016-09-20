@@ -33,7 +33,15 @@ public class CompanyController {
       return companyService.addChildren(company);
     }
 
+    @RequestMapping(value = "/api/company", method = RequestMethod.PUT)
+    public Company updateCompany(@RequestBody Company company){
+        return companyService.save(company);
+    }
 
+    @RequestMapping(value = "/api/company/{id}", method = RequestMethod.DELETE)
+    public void deleteCompany(@PathVariable("id") Long id){
+       companyService.deleteCompanyById(id);
+    }
 
 
 }

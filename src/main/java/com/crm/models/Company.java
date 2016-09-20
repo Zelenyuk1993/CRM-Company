@@ -27,12 +27,14 @@ public class Company {
     @NotNull
     private String name;
 
-    private Integer profit;
+    private Integer profit = 0;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentCompanies")
+    private Integer sum = 0;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REMOVE}, mappedBy = "parentCompanies")
     private Set<Company> childrenCompanies = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.DETACH}, fetch = FetchType.EAGER)
     private Company parentCompanies;
 
     public Company(){
@@ -62,8 +64,36 @@ public class Company {
         return profit;
     }
 
+    public void sum(){
+        addProfit(this.parentCompanies);
+    }
+
     public void setProfit(Integer profit) {
         this.profit = profit;
+        addProfit(this.parentCompanies);
+    }
+
+    public void setProfitForSerealization(Integer profit){
+        this.profit = profit;
+    }
+
+    private void addProfit(Company company) {
+        if(company != null){
+            System.err.println("aa");
+            company.addSum(this.sum);
+            company.addSum(this.profit);
+            addProfit(company.getParentCompanies());
+        }else {
+            addSum(getProfit());
+        }
+    }
+
+    public Integer getSum() {
+        return sum;
+    }
+
+    public void addSum(Integer sum){
+        this.sum = sum + this.sum;
     }
 
     public Set<Company> getChildrenCompanies() {
@@ -84,5 +114,9 @@ public class Company {
 
     public void setParentCompanies(Company parentCompanies) {
         this.parentCompanies = parentCompanies;
+    }
+
+    public void setSum(Integer sum) {
+        this.sum = sum;
     }
 }

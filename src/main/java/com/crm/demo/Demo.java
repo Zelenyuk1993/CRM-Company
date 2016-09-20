@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 
 /**
- * Created by Dimas on 14.09.2016.
+ * Demo Company CRM
+ *
+ * @author  by Dima Zelenyuk
  */
 @RestController
 public class Demo {
@@ -20,20 +22,20 @@ public class Demo {
     @RequestMapping(value = "/demo")
     public String demo(){
 
-        Company company0 = new Company("Parent1");
-        company0.setProfit(1000);
+        Company company0 = new Company("Company1");
+        company0.setProfit(25);
         companyService.save(company0);
-        Company company1 = new Company("Children1");
-        company1.setProfit(1500);
+        Company company1 = new Company("Company2");
         company1.setParentCompanies(companyService.findOne(1L));
+        company1.setProfit(13);
         companyService.save(company1);
-        Company company2 = new Company("Children2");
-        company2.setProfit(1250);
-        company2.setParentCompanies(companyService.findOne(2L));
+        Company company2 = new Company("Company4");
+        company2.setParentCompanies(companyService.findOne(1L));
+        company2.setProfit(10);
         companyService.save(company2);
-        Company company3 = new Company("Children3");
-        company3.setProfit(1750);
+        Company company3 = new Company("Company3");
         company3.setParentCompanies(companyService.findOne(2L));
+        company3.setProfit(5);
         companyService.save(company3);
 
         return "OKI";

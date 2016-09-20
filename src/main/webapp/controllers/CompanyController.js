@@ -1,32 +1,53 @@
 app
-    .controller('CompanyController', function ($scope, serverService) {
-        $scope.test = "Hello World!!!";
+    .controller('CompanyController', function ($scope, $stateParams, serverService) {
 
-        getCompaniesAndSumProfit();
+        getCompany();
 
-        function getCompaniesAndSumProfit() {
-            serverService.getCompanies().then(function (answer) {
-                $scope.companies = _.filter(answer, function (value) {
-                    if (value.childrenCompanies.length != 0) {
-                        return value.sum = _.sumBy(value.childrenCompanies, function (children) {
-                            return children.profit;
-                        });
-                    } else {
-                        return value;
+        function getCompany() {
+        serverService.getCompany($stateParams.companyId)
+            .then(function (answer) {
+                $scope.company  = answer;
+                    if (($scope.company.childrenCompanies.length != 0) && ($scope.company.sum == undefined)) {
+                        $scope.company.sum = _.sumBy($scope.company.childrenCompanies, function (children) {
+                                return children.profit;
+                            }) + $scope.company.profit;
                     }
-                });
+                $scope.newCompany = {
+                    id: null,
+                    name: '',
+                    profit: 0,
+                    parentCompanies: {
+                        id: $scope.company.id,
+                        name: $scope.company.name,
+                        profit: $scope.company.profit
+                    }
+                };
+
             });
         }
-        $scope.newCompany = {
-            id: null,
-            name: '',
-            profit: null,
-            parentCompanies: null
+
+
+
+        $scope.updateCompany = function (company) {
+            serverService.updateCompany(company).then(function () {
+                getCompany();
+            })
         };
-        
-        $scope.save = function () {
-            serverService.saveCompany($scope.newCompany).then(function () {
-                getCompaniesAndSumProfit();
+
+        $scope.deleteCompany = function (companyId) {
+            serverService.deleteCompany(companyId).then(function () {
+                getCompany();
             });
         };
+
+        $scope.save = function () {
+            serverService.saveCompany($scope.newCompany).then(function () {
+                getCompany();
+            });
+        };
+
+        $scope.addFilial = function () {
+            $scope.company.childrenCompanies.push($scope.newCompany);
+        }
+
     });

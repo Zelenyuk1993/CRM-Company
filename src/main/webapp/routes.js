@@ -12,10 +12,16 @@ app
             //State for root URL
             .state('app.main', {
                 url: "/",
+                controller: 'TreeController',
+                templateUrl: 'template/tree.html'
+            })
+
+            .state('app.company', {
+                url: "/show/{companyId}",
                 controller: 'CompanyController',
-                templateUrl: 'template/company.html'
+                templateUrl: 'template/companyShow.html'
             });
-        
+
         $stateProvider
             .state('error', {
                 abstract: true,

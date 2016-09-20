@@ -1,0 +1,29 @@
+<div class="tree">
+    <script type="text/ng-template" id="field_renderer.html">
+        <li ng-repeat="company in company.childrenClient">
+            <a ui-sref="app.company({companyId: company.id})">{{company.name}}</a>
+            <ul ng-if="company.childrenClient != undefined" ng-include="'field_renderer.html'"></ul>
+        </li>
+    </script>
+
+    <div class="tree">
+        <ul>
+            <li ng-repeat="company in companies">
+                <a ui-sref="app.company({companyId: company.id})">{{company.name}}</a>
+                <ul ng-if="company.childrenClient != undefined" ng-include="'field_renderer.html'"></ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

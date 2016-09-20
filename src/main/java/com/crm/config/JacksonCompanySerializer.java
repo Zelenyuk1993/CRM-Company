@@ -9,7 +9,7 @@ import java.util.Optional;
  * JacksonCompanySerializer
  * Custom JSON serializer fo Company json serialization
  *
- * @author Andrii Blyznuk
+ * @author Dima Zelenyuk
  */
 public class JacksonCompanySerializer extends JsonSerializer<Company> {
 
@@ -18,9 +18,9 @@ public class JacksonCompanySerializer extends JsonSerializer<Company> {
         gen.writeStartObject();
         gen.writeNumberField("id", value.getId());
         gen.writeStringField("name", value.getName());
-        if(value.getProfit() != null){
-            gen.writeNumberField("profit", value.getProfit());
-        }
+        gen.writeNumberField("profit", value.getProfit());
+        gen.writeNumberField("sum", value.getSum());
+
 
         gen.writeFieldName("childrenCompanies");
         gen.writeStartArray();
@@ -29,9 +29,23 @@ public class JacksonCompanySerializer extends JsonSerializer<Company> {
                 gen.writeStartObject();
                 gen.writeNumberField("id", children.getId());
                 gen.writeStringField("name", children.getName());
-                if(value.getProfit() != null){
-                    gen.writeNumberField("profit", children.getProfit());
-                }
+                gen.writeNumberField("profit", children.getProfit());
+                gen.writeNumberField("sum", children.getSum());
+                Optional.ofNullable(children.getParentCompanies()).ifPresent(parent -> {
+                    try {
+                        gen.writeFieldName("parentCompanies");
+                        gen.writeStartObject();
+                        gen.writeNumberField("id", parent.getId());
+                        gen.writeStringField("name", parent.getName());
+                        if(value.getProfit() != null){
+                            gen.writeNumberField("profit", parent.getProfit());
+                        }
+                        gen.writeEndObject();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
                 gen.writeEndObject();
             } catch (IOException e) {
                 e.printStackTrace();

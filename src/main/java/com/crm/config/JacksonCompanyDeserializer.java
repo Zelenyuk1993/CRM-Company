@@ -16,10 +16,10 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * JacksonUserDeserializer
+ * JacksonCompanyDeserializer
  * Custom JSON deserializer for Company json deserialization
  *
- * @author  Andrii Blyznuk
+ * @author  Dima Zelenyuk
  */
 public class JacksonCompanyDeserializer extends JsonDeserializer<Company> {
 
@@ -31,6 +31,21 @@ public class JacksonCompanyDeserializer extends JsonDeserializer<Company> {
         JsonNode jsonNode = p.getCodec().readTree(p);
         Optional.ofNullable(jsonNode.get("id")).ifPresent(id -> company.setId(id.asLong()));
         Optional.ofNullable(jsonNode.get("name")).ifPresent(name -> company.setName(name.asText()));
+
+        if (!jsonNode.get("parentCompanies").isNull()) {
+                Optional.ofNullable(jsonNode.get("parentCompanies")).ifPresent(parentCompanyJsonNodes -> {
+                    Company parentCompany = new Company();
+                    parentCompany.setId(parentCompanyJsonNodes.get("id").asLong());
+                    parentCompany.setName(parentCompanyJsonNodes.get("name").asText());
+                    Optional.ofNullable(parentCompanyJsonNodes.get("sum")).ifPresent(profit -> parentCompany.setSum(profit.asInt()));
+                    Optional.ofNullable(parentCompanyJsonNodes.get("profit")).ifPresent(profit -> parentCompany.setProfitForSerealization(profit.asInt()));
+                    company.setParentCompanies(parentCompany);
+                });
+            }
+
+
+
+        Optional.ofNullable(jsonNode.get("sum")).ifPresent(sum -> company.setSum(sum.asInt()));
         Optional.ofNullable(jsonNode.get("profit")).ifPresent(profit -> company.setProfit(profit.asInt()));
 
         Optional.ofNullable(jsonNode.get("childrenCompanies")).ifPresent(childrenCompaniesJsonNodes -> {
@@ -39,23 +54,11 @@ public class JacksonCompanyDeserializer extends JsonDeserializer<Company> {
                 Company childrenCompany = new Company();
                 childrenCompany.setId(childrenCompanyJsonNodes.get("id").asLong());
                 childrenCompany.setName(childrenCompanyJsonNodes.get("name").asText());
-                Optional.ofNullable(childrenCompanyJsonNodes.get("profit")).ifPresent(profit -> childrenCompany.setProfit(profit.asInt()));
 
                 childrenCompanies.add(childrenCompany);
             });
             company.setChildrenCompanies(childrenCompanies);
         });
-
-        if(!jsonNode.get("parentCompanies").isNull()) {
-            Optional.ofNullable(jsonNode.get("parentCompanies")).ifPresent(parentCompanyJsonNodes -> {
-                Company parentCompany = new Company();
-                parentCompany.setId(parentCompanyJsonNodes.get("id").asLong());
-                parentCompany.setName(parentCompanyJsonNodes.get("name").asText());
-                Optional.ofNullable(parentCompanyJsonNodes.get("profit")).ifPresent(profit -> parentCompany.setProfit(profit.asInt()));
-
-                company.setParentCompanies(parentCompany);
-            });
-        }
 
         return company;
     }

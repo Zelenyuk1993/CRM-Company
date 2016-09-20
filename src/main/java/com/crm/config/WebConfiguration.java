@@ -5,6 +5,12 @@ import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * WebConfiguration
+ *
+ * @author Dima Zelenyuk
+ */
+
 @Configuration
 public class WebConfiguration {
     @Bean

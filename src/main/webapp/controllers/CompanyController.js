@@ -15,7 +15,7 @@ app
                 $scope.newCompany = {
                     id: null,
                     name: '',
-                    profit: 0,
+                    profit: 0,  
                     parentCompanies: {
                         id: $scope.company.id,
                         name: $scope.company.name,
@@ -24,9 +24,7 @@ app
                 };
 
             });
-        }
-
-
+        }       
 
         $scope.updateCompany = function (company) {
             serverService.updateCompany(company).then(function () {

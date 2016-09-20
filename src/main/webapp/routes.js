@@ -15,12 +15,19 @@ app
                 controller: 'TreeController',
                 templateUrl: 'template/tree.html'
             })
-
+                
+            //State for company
             .state('app.company', {
                 url: "/show/{companyId}",
                 controller: 'CompanyController',
                 templateUrl: 'template/companyShow.html'
-            });
+            })
+            //State for addCompany
+            .state('app.addCompany', {
+                url: "/addCompany",
+                controller: 'AddCompanyController',
+                templateUrl: 'template/addCompany.html'
+        });
 
         $stateProvider
             .state('error', {

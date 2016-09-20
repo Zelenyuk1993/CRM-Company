@@ -1,9 +1,17 @@
 .header{
-  .main-test{
+.headerPanel{
+  text-align: center;
+  color: white;
+  font-family: SIGNS NORMAL;
+  font-size: 30px;
+  height: 40px;
+  width: 100%;
+  background: #998f92;
+}
+
+  .headerPanel1{
+    height: 3px;
     width: 100%;
-    height: 50px;
-    background: #282499;
-    text-align: center;
-    font-size: 30px;
+    background: #99356a;
   }
 }

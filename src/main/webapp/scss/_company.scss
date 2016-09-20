@@ -1,5 +1,47 @@
 .company {
   .table-data {
+    border-bottom: 1px solid silver;
     border-left: 1px solid silver;
   }
+
+  .nameTable{
+    color: white;
+    background: #998f92;
+    margin-top: 0px;
+    text-align: center;
+    border-bottom: 4px solid silver;
+  }
+
+  .table-companies{
+    height: auto;
+    width: auto;
+    float: left;
+    margin-left: 100px;
+    margin-top: 20px;
+    border: 4px solid silver;
+  }
+
+  .companyPage{
+  }
+
+  .addCompany-Button{
+    margin-bottom: 35px;
+    text-align: center;
+  }
+
+  .showCompany{
+    float: left;
+    margin-left: 60px;
+    margin-top: 20px;
+    height: 370px;
+    width: 400px;
+    border: 4px solid silver;
+
+  }
+  .buttonCompany{
+    margin-left: 85px;
+    margin-top: -20px;
+
+  }
+
 }

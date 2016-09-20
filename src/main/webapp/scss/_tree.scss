@@ -1,5 +1,10 @@
 /*Now the CSS*/
+
+
+
+
 .tree {
+
   * {
 
     margin: 0;
@@ -93,9 +98,9 @@
     font-size: 40px;
     display: inline-block;
 
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
 
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -116,7 +121,9 @@
   .tree li a:hover + ul ul::before {
     border-color: #94a0b4;
   }
+
+
+
 }
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
+

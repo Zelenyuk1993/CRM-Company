@@ -1,71 +1,109 @@
 <div class="company">
-    <th class="table-data">
-        <md-input-container class="md-block" flex-gt-xs>
-            <label>Company Name</label>
-            <input ng-model="company.name">
-        </md-input-container>
-    </th>
-    <th class="table-data">
-        <md-input-container class="md-block" flex-gt-xs>
-            <label>Company Estimated Earnings</label>
-            <input ng-model="company.profit">
-        </md-input-container>
-    </th>
-    <th class="table-data">
-        <md-input-container class="md-block" flex-gt-xs>
-            <label>Company Estimated Earnings + Child Companies Estimated Earnings</label>
-            <input ng-model="company.sum">
-        </md-input-container>
-    </th>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Company Estimated Earnings</th>
-        <th>Company Estimated Earnings + Child Companies Estimated Earnings</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="company in company.childrenCompanies">
-        <th class="table-data">
-            <md-input-container class="md-block" flex-gt-xs>
-                <label>Company Name</label>
-                <input ng-model="company.name">
-            </md-input-container>
-        </th>
-        <th class="table-data">
-            <md-input-container class="md-block" flex-gt-xs>
-                <label>Company Estimated Earnings</label>
-                <input ng-model="company.profit">
-            </md-input-container>
-        </th>
-        <th class="table-data">
-            <md-input-container class="md-block" flex-gt-xs>
-                <label>Company Estimated Earnings + Child Companies Estimated Earnings</label>
-                <input ng-model="company.sum">
-            </md-input-container>
-        </th>
-        <th>
-            <md-button type="button" class="btn btn-success btn-lg"
-                    ng-click="updateCompany(company)">
-                <ng-md-icon icon="save"
-                            size="24">
-                </ng-md-icon>
-            </md-button>
-            <md-button type="button" class="btn btn-danger btn-lg" ng-click="deleteCompany(company.id)">
-                <ng-md-icon icon="delete"
-                            size="24">
-                </ng-md-icon>
-            </md-button>
-        </th>
-    </tr>
-    </tbody>
-</table>
+    <div class="companyPage">
 
-<md-button ng-click="addFilial(company)">
-    Add Filial
-</md-button>
+
+        <div class="showCompany">
+            <h3 class="nameTable">Company</h3>
+
+            <th class="table-data">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Company Name</label>
+                    <input ng-model="company.name">
+                </md-input-container>
+            </th>
+            <th class="table-data">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Company Estimated Earnings</label>
+                    <input ng-model="company.profit" type="number">
+                </md-input-container>
+            </th>
+            <th class="table-data">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Company Estimated Earnings + Child Companies Estimated Earnings</label>
+                    <input readonly="true" ng-model="company.sum" >
+                </md-input-container>
+            </th>
+            <th class="table-data">
+                <div class="buttonCompany">
+                    <md-button type="button" class="btn btn-success btn-lg"
+                               ng-click="updateCompany(company)">
+                        <ng-md-icon icon="save"
+                                    size="24">
+                        </ng-md-icon>
+                    </md-button>
+
+                    <md-button type="button" class="btn btn-danger btn-lg" ng-click="deleteCompany(company.id)">
+                        <ng-md-icon icon="delete"
+                                    size="24">
+                        </ng-md-icon>
+                    </md-button>
+                </div>
+            </th>
+        </div>
+
+
+
+        <div class="table-companies">
+
+            <h3 class="nameTable">Filial Company</h3>
+
+
+            <table class="table"  >
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Company Estimated Earnings</th>
+                    <th>Company Estimated Earnings + Child Companies Estimated Earnings</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="company in company.childrenCompanies">
+                    <th class="table-data">
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label>Company Name</label>
+                            <input ng-model="company.name">
+                        </md-input-container>
+                    </th>
+                    <th class="table-data">
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label>Company Estimated Earnings</label>
+                            <input ng-model="company.profit" type="number">
+                        </md-input-container>
+                    </th>
+                    <th class="table-data">
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label>Company Estimated Earnings + Child Companies Estimated Earnings</label>
+                            <input readonly="true" ng-model="company.sum" type="number">
+                        </md-input-container>
+                    </th>
+                    <th class="table-data">
+                        <md-button type="button" class="btn btn-success btn-lg" ng-click="updateCompany(company)">
+                            <ng-md-icon icon="save"
+                                        size="24">
+                            </ng-md-icon>
+                        </md-button>
+                        <md-button type="button" class="btn btn-danger btn-lg" ng-click="deleteCompany(company.id)">
+                            <ng-md-icon icon="delete"
+                                        size="24">
+                            </ng-md-icon>
+                        </md-button>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="addCompany-Button">
+                <md-button type="button" class="btn btn-primary btn-md" ng-click="addFilial(company)">Add Filial</md-button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
 
 </div>

@@ -37,6 +37,10 @@ public class Demo {
         company3.setParentCompanies(companyService.findOne(2L));
         company3.setProfit(5);
         companyService.save(company3);
+        Company company4 = new Company("Company5");
+        company4.setParentCompanies(companyService.findOne(2L));
+        company4.setProfit(15);
+        companyService.save(company4);
 
         return "OKI";
     }

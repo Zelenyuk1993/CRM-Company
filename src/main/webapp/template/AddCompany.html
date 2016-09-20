@@ -1,0 +1,44 @@
+<div class="company">
+
+    <div class="companyPage">
+
+
+        <div class="addCompany">
+            <h3 class="nameTable">Company</h3>
+            <!--<form name="companyForm">-->
+                <th class="table-data">
+                    <md-input-container class="md-block" flex-gt-xs>
+                        <label>Company Name</label>
+                        <input ng-model="newCompany.name" required md-maxlength="50" minlength="2">
+                        <!--<div ng-messages="companyForm.$error" ng-show="companyForm.$dirty">-->
+                            <!--<div ng-message="required">please enter name!</div>-->
+                        <!--</div>-->
+
+                    </md-input-container>
+                </th>
+                <th class="table-data">
+                    <md-input-container class="md-block" flex-gt-xs>
+                        <label>Company Estimated Earnings</label>
+                        <input ng-model="newCompany.profit" type="number">
+                    </md-input-container>
+                </th>
+                <th class="table-data">
+                    <div class="buttonCompany">
+                        <md-button type="submit" ui-sref="app.main" class="btn btn-success btn-lg" ng-click="save()">
+                            <ng-md-icon icon="save"
+                                        size="24">
+                            </ng-md-icon>
+                        </md-button>
+
+                        <md-button type="button" class="btn btn-danger btn-lg" ng-click="deleteCompany(company.id)">
+                            <ng-md-icon icon="delete"
+                                        size="24">
+                            </ng-md-icon>
+                        </md-button>
+                    </div>
+                </th>
+            <!--</form>-->
+        </div>
+    </div>
+</div>
+

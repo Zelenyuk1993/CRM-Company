@@ -6,9 +6,9 @@ build/
 gradle-app.setting
 
 ### Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-#gradle/
-#gradlew
-#gradlew.bat
+gradle/
+gradlew
+gradlew.bat
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion

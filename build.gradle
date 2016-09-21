@@ -38,6 +38,7 @@ repositories {
 
 
 dependencies {
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.5')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-actuator-docs')
@@ -56,4 +57,6 @@ dependencies {
 	testCompile('com.jayway.jsonpath:json-path-assert:0.8.1')
 	testCompile('org.subethamail:subethasmtp:3.1.7')
 
+
 }
+

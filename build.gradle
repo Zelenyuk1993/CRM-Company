@@ -51,16 +51,3 @@ dependencies {
 	testCompile('com.jayway.jsonpath:json-path-assert:0.8.1')
 	testCompile('org.subethamail:subethasmtp:3.1.7')
 }
-
-task stage(type: Copy, dependsOn: [clean, build]) {
-	from jar.archivePath
-	into project.rootDir
-	rename {
-		'app.jar'
-	}
-}
-stage.mustRunAfter(clean)
-
-clean << {
-	project.file('app.jar').delete()
-}
